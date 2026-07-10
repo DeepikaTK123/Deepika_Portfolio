@@ -44,8 +44,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Prepare static export for GitHub Pages
+        run: rm -rf src/app/api
+
       - name: Build static site
-        run: npm run build
+        run: GITHUB_PAGES_BUILD=true npm run build
+        env:
+          NEXT_PUBLIC_CONSULTATION_API_URL: ${{ secrets.CONSULTATION_API_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

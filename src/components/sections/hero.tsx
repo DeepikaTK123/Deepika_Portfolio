@@ -9,8 +9,10 @@ import { GradientBlob } from "@/components/effects/gradient-blob";
 import { DeveloperIllustration } from "@/components/illustrations/developer-illustration";
 import { heroSkills } from "@/data/site";
 import { cn } from "@/lib/utils";
+import { useConsultation } from "@/components/consultation/consultation-provider";
 
 export function HeroSection() {
+  const { openConsultation } = useConsultation();
   return (
     <section
       id="home"
@@ -92,11 +94,9 @@ export function HeroSection() {
                     <ArrowRight size={18} />
                   </Link>
                 </MagneticButton>
-                <MagneticButton variant="secondary" size="lg" asChild>
-                  <Link href="#contact">
-                    <Calendar size={18} />
-                    Book a Call
-                  </Link>
+                <MagneticButton variant="secondary" size="lg" onClick={openConsultation}>
+                  <Calendar size={18} />
+                  Book a Call
                 </MagneticButton>
               </motion.div>
             </div>

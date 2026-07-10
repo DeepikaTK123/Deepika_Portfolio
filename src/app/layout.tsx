@@ -6,6 +6,7 @@ import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { CursorGlow } from "@/components/layout/cursor-glow";
 import { LoadingScreen } from "@/components/layout/loading-screen";
 import { NoiseOverlay } from "@/components/effects/noise-overlay";
+import { AppProviders } from "@/components/providers/app-providers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -79,11 +80,13 @@ export default function RootLayout({
           Skip to main content
         </a>
         <SmoothScroll>
-          <NoiseOverlay />
-          <CursorGlow />
-          <Navbar />
-          <main id="main-content">{children}</main>
-          <Footer />
+          <AppProviders>
+            <NoiseOverlay />
+            <CursorGlow />
+            <Navbar />
+            <main id="main-content">{children}</main>
+            <Footer />
+          </AppProviders>
         </SmoothScroll>
       </body>
     </html>

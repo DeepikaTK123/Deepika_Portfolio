@@ -1,14 +1,15 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
 import { MagneticButton } from "@/components/effects/magnetic-button";
 import { FadeIn } from "@/components/effects/fade-in";
 import { GradientBlob } from "@/components/effects/gradient-blob";
-import { contactEmail } from "@/data/site";
+import { useConsultation } from "@/components/consultation/consultation-provider";
 
 export function CTASection() {
+  const { openConsultation } = useConsultation();
+
   return (
     <section
       id="contact"
@@ -18,11 +19,9 @@ export function CTASection() {
       <div className="container-wide">
         <FadeIn>
           <div className="relative rounded-4xl overflow-hidden">
-            {/* Gradient Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-background to-accent/10" />
             <GradientBlob className="top-[-30%] right-[-10%]" color="rgba(59,130,246,0.2)" size="600px" />
             <GradientBlob className="bottom-[-30%] left-[-10%]" color="rgba(59,130,246,0.15)" size="500px" delay={2} />
-
             <div className="absolute inset-0 border border-white/[0.08] rounded-4xl" />
 
             <div className="relative px-8 py-20 md:px-16 md:py-28 lg:py-32 text-center">
@@ -56,11 +55,9 @@ export function CTASection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <MagneticButton size="lg" asChild>
-                  <Link href={`mailto:${contactEmail}`}>
-                    <Calendar size={18} />
-                    Book a Free Consultation
-                  </Link>
+                <MagneticButton size="lg" onClick={openConsultation}>
+                  <Calendar size={18} />
+                  Book a Free Consultation
                 </MagneticButton>
               </motion.div>
             </div>
