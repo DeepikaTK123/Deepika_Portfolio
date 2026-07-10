@@ -9,6 +9,15 @@ export const navLinks = [
 
 export const contactEmail = "deepikakumar78910@gmail.com";
 
+export const linkedInUrl = "https://www.linkedin.com/in/deepika-tk07/";
+export const githubUrl = "https://github.com/DeepikaTK123";
+
+export const socialLinks = {
+  email: contactEmail,
+  linkedin: linkedInUrl,
+  github: githubUrl,
+} as const;
+
 export const trustedBy = [
   "AWS",
   "Docker",

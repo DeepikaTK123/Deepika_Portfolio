@@ -3,23 +3,30 @@ import { Mail } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons/brand-icons";
 import { Separator } from "@/components/ui/separator";
 import { FadeIn } from "@/components/effects/fade-in";
-import { contactEmail } from "@/data/site";
+import {
+  contactEmail,
+  linkedInUrl,
+  githubUrl,
+} from "@/data/site";
 
-const socialLinks = [
+const footerLinks = [
   {
     label: contactEmail,
     href: `mailto:${contactEmail}`,
     icon: Mail,
+    external: false,
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com",
+    href: linkedInUrl,
     icon: LinkedInIcon,
+    external: true,
   },
   {
     label: "GitHub",
-    href: "https://github.com",
+    href: githubUrl,
     icon: GitHubIcon,
+    external: true,
   },
 ] as const;
 
@@ -46,12 +53,12 @@ export function Footer() {
 
               <nav aria-label="Social links">
                 <ul className="flex items-center gap-6">
-                  {socialLinks.map((link) => (
+                  {footerLinks.map((link) => (
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        target={link.label === contactEmail ? undefined : "_blank"}
-                        rel={link.label === contactEmail ? undefined : "noopener noreferrer"}
+                        target={link.external ? "_blank" : undefined}
+                        rel={link.external ? "noopener noreferrer" : undefined}
                         className="flex items-center gap-2 text-muted hover:text-foreground transition-colors duration-300"
                         aria-label={link.label}
                       >
