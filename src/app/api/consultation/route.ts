@@ -22,10 +22,18 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Consultation email error:", error);
 
-    const message =
-      error instanceof Error && error.message.includes("SMTP")
-        ? "Email service is not configured."
-        : "Failed to send consultation request.";
+    let message = "Failed to send consultation request.";
+
+    if (error instanceof Error) {
+      if (error.message.includes("SMTP")) {
+        message = error.message.replace("SMTP: ", "");
+      } else if ("code" in error && error.code === "EAUTH") {
+        message =
+          "Gmail login failed. Use a Gmail App Password in .env.local (not your regular password).";
+      } else if (error.message) {
+        message = error.message;
+      }
+    }
 
     return NextResponse.json({ error: message }, { status: 500 });
   }

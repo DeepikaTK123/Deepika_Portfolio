@@ -8,8 +8,14 @@ function getSmtpConfig() {
   const pass = process.env.SMTP_PASS;
   const from = process.env.SMTP_FROM || user;
 
-  if (!host || !user || !pass || !from) {
+  if (!host || !user || !from) {
     throw new Error("SMTP configuration is incomplete.");
+  }
+
+  if (!pass || pass === "REPLACE_WITH_YOUR_GMAIL_APP_PASSWORD") {
+    throw new Error(
+      "SMTP: Add your Gmail App Password to .env.local as SMTP_PASS"
+    );
   }
 
   return {
@@ -36,7 +42,12 @@ export async function sendConsultationEmail(data: ConsultationFormData) {
     port: smtp.port,
     secure: smtp.secure,
     auth: smtp.auth,
+    tls: {
+      minVersion: "TLSv1.2",
+    },
   });
+
+  await transporter.verify();
 
   const text = [
     "New consultation request from your portfolio website.",
