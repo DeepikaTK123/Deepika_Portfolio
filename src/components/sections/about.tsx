@@ -32,7 +32,7 @@ export function AboutSection() {
           <FadeIn direction="left">
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden group">
               <Image
-                src={assetPath("/images/deepika.png")}
+                src={assetPath("/images/deepika.jpg")}
                 alt="Deepika - Python Backend Developer"
                 fill
                 className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
