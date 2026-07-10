@@ -128,11 +128,18 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
         "Thank you! Your consultation request has been sent successfully. I'll contact you soon."
       );
     } catch (error) {
+      const isNetworkOrMissingApi =
+        error instanceof TypeError ||
+        (error instanceof Error &&
+          error.message === "Failed to send consultation request.");
+
       showToast(
         "error",
-        error instanceof Error
-          ? error.message
-          : "Something went wrong. Please try again later."
+        isNetworkOrMissingApi
+          ? "The consultation service is not connected yet. Please use Contact Me or email deepikakumar78910@gmail.com directly."
+          : error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again later."
       );
     } finally {
       setIsSubmitting(false);
