@@ -67,6 +67,10 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
   const isValid = Object.keys(errors).length === 0;
 
   useEffect(() => {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }, []);
+
+  useEffect(() => {
     if (!open) {
       setForm(initialForm);
       setTouched({});
@@ -121,7 +125,7 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
           full_name: form.fullName,
           email: form.email,
           phone: form.phone,
-          company: form.companyName,
+          company: form.companyName || "Not provided",
           project_type: form.projectType,
           message: form.projectDescription,
           time: new Date().toLocaleString(),
@@ -137,8 +141,24 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
         "success",
         "🎉 Thank you! Your consultation request has been sent successfully. I'll review your requirements and contact you within 24 hours."
       );
-    } catch {
-      showToast("error", "Something went wrong. Please try again later.");
+    } catch (error) {
+      console.error("EmailJS error:", error);
+
+      let message = "Something went wrong. Please try again later.";
+
+      if (error && typeof error === "object" && "status" in error) {
+        const emailError = error as { status?: number; text?: string };
+
+        if (emailError.status === 403) {
+          message =
+            "EmailJS blocked the request. Add deepikatk123.github.io to Allowed Domains in your EmailJS dashboard.";
+        } else if (emailError.status === 400) {
+          message =
+            "Email template error. Check template variables in your EmailJS dashboard.";
+        }
+      }
+
+      showToast("error", message);
     } finally {
       setIsSubmitting(false);
     }
