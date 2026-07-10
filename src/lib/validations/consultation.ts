@@ -18,15 +18,16 @@ export interface ConsultationFormData {
   projectDescription: string;
 }
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const GMAIL_EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@gmail\.com$/i;
 
 export function isValidEmail(email: string): boolean {
-  return EMAIL_REGEX.test(email.trim());
+  return GMAIL_EMAIL_REGEX.test(email.trim());
 }
 
+/** Country code (1–3 digits) followed by exactly 10-digit mobile number. */
 export function isValidPhone(phone: string): boolean {
   const digits = phone.replace(/\D/g, "");
-  return digits.length >= 8;
+  return /^\d{11,13}$/.test(digits);
 }
 
 export function validateConsultationForm(
@@ -43,13 +44,13 @@ export function validateConsultationForm(
   if (!data.email.trim()) {
     errors.email = "Email address is required.";
   } else if (!isValidEmail(data.email)) {
-    errors.email = "Please enter a valid email address.";
+    errors.email = "Use a Gmail address (e.g. name@gmail.com).";
   }
 
   if (!data.phone.trim()) {
     errors.phone = "Phone number is required.";
   } else if (!isValidPhone(data.phone)) {
-    errors.phone = "Please enter a valid phone number.";
+    errors.phone = "Use country code + 10 digits (e.g. +91 9876543210).";
   }
 
   if (!data.projectType) {

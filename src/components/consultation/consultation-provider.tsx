@@ -8,11 +8,14 @@ import {
   useState,
 } from "react";
 import { ConsultationModal } from "@/components/consultation/consultation-modal";
+import { ProjectAccessModal } from "@/components/projects/project-access-modal";
 import { Toast, type ToastState } from "@/components/consultation/toast";
 
 interface ConsultationContextValue {
   openConsultation: () => void;
   closeConsultation: () => void;
+  openProjectAccess: () => void;
+  closeProjectAccess: () => void;
   showToast: (type: "success" | "error", message: string) => void;
 }
 
@@ -24,10 +27,25 @@ export function ConsultationProvider({
   children: React.ReactNode;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isProjectAccessOpen, setIsProjectAccessOpen] = useState(false);
   const [toast, setToast] = useState<ToastState | null>(null);
 
   const openConsultation = useCallback(() => setIsOpen(true), []);
   const closeConsultation = useCallback(() => setIsOpen(false), []);
+  const openProjectAccess = useCallback(() => setIsProjectAccessOpen(true), []);
+  const closeProjectAccess = useCallback(() => setIsProjectAccessOpen(false), []);
+
+  const handleContactFromProjectModal = useCallback(() => {
+    setIsProjectAccessOpen(false);
+    window.setTimeout(() => {
+      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    }, 200);
+  }, []);
+
+  const handleBookFromProjectModal = useCallback(() => {
+    setIsProjectAccessOpen(false);
+    window.setTimeout(() => setIsOpen(true), 200);
+  }, []);
 
   const showToast = useCallback((type: "success" | "error", message: string) => {
     const id =
@@ -41,14 +59,32 @@ export function ConsultationProvider({
   }, []);
 
   const value = useMemo(
-    () => ({ openConsultation, closeConsultation, showToast }),
-    [openConsultation, closeConsultation, showToast]
+    () => ({
+      openConsultation,
+      closeConsultation,
+      openProjectAccess,
+      closeProjectAccess,
+      showToast,
+    }),
+    [
+      openConsultation,
+      closeConsultation,
+      openProjectAccess,
+      closeProjectAccess,
+      showToast,
+    ]
   );
 
   return (
     <ConsultationContext.Provider value={value}>
       {children}
       <ConsultationModal open={isOpen} onOpenChange={setIsOpen} />
+      <ProjectAccessModal
+        open={isProjectAccessOpen}
+        onOpenChange={setIsProjectAccessOpen}
+        onContact={handleContactFromProjectModal}
+        onBookConsultation={handleBookFromProjectModal}
+      />
       <Toast toast={toast} onClose={() => setToast(null)} />
     </ConsultationContext.Provider>
   );

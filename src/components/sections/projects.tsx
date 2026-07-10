@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/brand-icons";
@@ -9,10 +8,12 @@ import { TextReveal } from "@/components/effects/text-reveal";
 import { FadeIn } from "@/components/effects/fade-in";
 import { MagneticButton } from "@/components/effects/magnetic-button";
 import { Badge } from "@/components/ui/badge";
+import { useConsultation } from "@/components/consultation/consultation-provider";
 import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
 
 export function ProjectsSection() {
+  const { openProjectAccess } = useConsultation();
   return (
     <section
       id="projects"
@@ -141,17 +142,17 @@ export function ProjectsSection() {
 
                     {/* Buttons */}
                     <div className="flex flex-wrap gap-4 mt-8">
-                      <MagneticButton asChild>
-                        <Link href={project.liveUrl}>
-                          Visit Project
-                          <ArrowUpRight size={16} />
-                        </Link>
+                      <MagneticButton type="button" onClick={openProjectAccess}>
+                        View Project
+                        <ArrowUpRight size={16} />
                       </MagneticButton>
-                      <MagneticButton variant="secondary" asChild>
-                        <Link href={project.githubUrl}>
-                          <GitHubIcon size={16} />
-                          GitHub
-                        </Link>
+                      <MagneticButton
+                        variant="secondary"
+                        type="button"
+                        onClick={openProjectAccess}
+                      >
+                        <GitHubIcon size={16} />
+                        GitHub
                       </MagneticButton>
                     </div>
                   </div>

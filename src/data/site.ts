@@ -47,53 +47,63 @@ export const stats = [
 
 export const experience = [
   {
-    period: "2022 — Present",
-    role: "Senior Python Backend Developer",
-    company: "Enterprise Solutions",
+    period: "Mar 2024 — June 2026",
+    role: "Software Engineer",
+    company: "WeP Solutions Limited, Bengaluru",
     description:
-      "Architecting and building scalable microservices handling 10M+ requests daily. Leading API design, cloud infrastructure, and performance optimization initiatives.",
+      "Designing scalable Python backend services and REST APIs for enterprise Document Management Systems. Deploying and maintaining applications on AWS EC2, building automation tools, and implementing logging and monitoring for production reliability.",
   },
   {
-    period: "2020 — 2022",
-    role: "Backend Developer",
-    company: "Tech Innovations Ltd",
+    period: "Apr 2023 — Mar 2024",
+    role: "Software Engineer",
+    company: "IoTronics System Pvt. Ltd., Bengaluru",
     description:
-      "Developed RESTful APIs and automated deployment pipelines. Reduced system latency by 40% through caching strategies and database optimization.",
+      "Developed backend applications using Python frameworks and REST APIs. Designed database schemas, optimized SQL queries, and built reusable modules to improve scalability and development efficiency in Agile delivery cycles.",
   },
   {
-    period: "2019 — 2020",
-    role: "Junior Developer",
-    company: "Startup Studio",
+    period: "Mar 2022 — Mar 2023",
+    role: "Associate Engineer – Product Development",
+    company: "Harman Connected Services, Bengaluru",
     description:
-      "Built foundational backend services using Django and PostgreSQL. Contributed to CI/CD pipeline setup and automated testing frameworks.",
+      "Built Python automation scripts for internal development workflows. Assisted in debugging backend services, supported functional and system testing, and collaborated with engineering teams to improve system stability.",
   },
 ] as const;
 
 export const education = [
   {
-    period: "2016 — 2020",
-    degree: "B.Tech in Computer Science",
-    institution: "University of Technology",
+    period: "2024 — 2026",
+    degree: "M.Tech in Cloud Computing",
+    institution: "Birla Institute of Technology and Science, Pilani",
     description:
-      "Specialized in software engineering, distributed systems, and database management. Graduated with honors.",
+      "Pursuing advanced studies in cloud computing, distributed systems, and modern infrastructure architecture.",
+  },
+  {
+    period: "2018 — 2022",
+    degree: "B.E. in Information Science & Engineering",
+    institution: "Kalpataru Institute of Technology (VTU)",
+    description:
+      "Built a strong foundation in software engineering, databases, and information systems.",
   },
 ] as const;
 
 export const skills = [
   "Python",
   "FastAPI",
+  "Flask",
   "Django",
-  "PostgreSQL",
-  "Redis",
-  "AWS",
-  "Docker",
-  "Kubernetes",
-  "RabbitMQ",
-  "Git",
-  "CI/CD",
   "REST APIs",
-  "GraphQL",
+  "PostgreSQL",
+  "SQL",
+  "AWS",
+  "EC2",
+  "Docker",
+  "CI/CD",
+  "Redis",
+  "RabbitMQ",
   "Microservices",
+  "Git",
+  "Kubernetes",
   "System Design",
   "Performance Tuning",
+  "Agile",
 ] as const;

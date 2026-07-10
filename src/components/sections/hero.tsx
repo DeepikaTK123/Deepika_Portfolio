@@ -77,9 +77,9 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 2.9 }}
               >
-                I craft high-performance backend systems that power modern
-                applications. From API design to cloud deployment, I deliver
-                solutions that scale with your business.
+                I design and deploy scalable backend systems using Python,
+                FastAPI, Flask, and Django — from REST APIs and microservices
+                to AWS cloud infrastructure and CI/CD automation.
               </motion.p>
 
               <motion.div

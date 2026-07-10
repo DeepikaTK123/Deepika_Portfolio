@@ -32,35 +32,40 @@ const initialForm: ConsultationFormData = {
   projectDescription: "",
 };
 
+type TouchedFields = Partial<Record<keyof ConsultationFormData, boolean>>;
+
 interface ConsultationModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
+function shouldShowFieldError(
+  key: keyof ConsultationFormData,
+  value: string,
+  error: string | undefined,
+  touched: TouchedFields,
+  submitAttempted: boolean
+): boolean {
+  if (!error) return false;
+  if (submitAttempted) return true;
+  if (touched[key]) return true;
+  return value.trim().length > 0;
+}
+
 export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps) {
   const { showToast } = useConsultation();
   const [form, setForm] = useState<ConsultationFormData>(initialForm);
+  const [touched, setTouched] = useState<TouchedFields>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitAttempted, setSubmitAttempted] = useState(false);
 
   const errors = useMemo(() => validateConsultationForm(form), [form]);
   const isValid = Object.keys(errors).length === 0;
 
-  const missingFields = useMemo(() => {
-    const labels: Record<string, string> = {
-      fullName: "Full Name",
-      email: "Email",
-      phone: "Phone",
-      projectDescription: "Project Description",
-    };
-    return Object.keys(errors)
-      .filter((key) => key in labels)
-      .map((key) => labels[key]);
-  }, [errors]);
-
   useEffect(() => {
     if (!open) {
       setForm(initialForm);
+      setTouched({});
       setSubmitAttempted(false);
       setIsSubmitting(false);
     }
@@ -71,6 +76,26 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
     value: ConsultationFormData[K]
   ) => {
     setForm((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const markTouched = (key: keyof ConsultationFormData) => {
+    setTouched((prev) => ({ ...prev, [key]: true }));
+  };
+
+  const fieldError = (key: keyof ConsultationFormData) => {
+    const error = errors[key];
+    if (
+      !shouldShowFieldError(
+        key,
+        String(form[key]),
+        error,
+        touched,
+        submitAttempted
+      )
+    ) {
+      return undefined;
+    }
+    return error;
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -114,6 +139,9 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
     }
   };
 
+  const descriptionLength = form.projectDescription.trim().length;
+  const descriptionError = fieldError("projectDescription");
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-xl">
@@ -131,31 +159,38 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
               id="fullName"
               label="Full Name"
               required
-              error={submitAttempted ? errors.fullName : undefined}
+              error={fieldError("fullName")}
             >
               <Input
                 id="fullName"
                 value={form.fullName}
                 onChange={(e) => updateField("fullName", e.target.value)}
+                onBlur={() => markTouched("fullName")}
                 placeholder="Your full name"
                 autoComplete="name"
+                aria-invalid={Boolean(fieldError("fullName"))}
+                className={inputErrorClass(fieldError("fullName"))}
               />
             </Field>
 
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4 items-start">
               <Field
                 id="email"
                 label="Email Address"
                 required
-                error={submitAttempted ? errors.email : undefined}
+                hint="Gmail only"
+                error={fieldError("email")}
               >
                 <Input
                   id="email"
                   type="email"
                   value={form.email}
                   onChange={(e) => updateField("email", e.target.value)}
-                  placeholder="you@example.com"
+                  onBlur={() => markTouched("email")}
+                  placeholder="you@gmail.com"
                   autoComplete="email"
+                  aria-invalid={Boolean(fieldError("email"))}
+                  className={inputErrorClass(fieldError("email"))}
                 />
               </Field>
 
@@ -163,15 +198,19 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
                 id="phone"
                 label="Phone Number"
                 required
-                error={submitAttempted ? errors.phone : undefined}
+                hint="Country code + 10 digits"
+                error={fieldError("phone")}
               >
                 <Input
                   id="phone"
                   type="tel"
                   value={form.phone}
                   onChange={(e) => updateField("phone", e.target.value)}
-                  placeholder="9876543210"
+                  onBlur={() => markTouched("phone")}
+                  placeholder="+91 9876543210"
                   autoComplete="tel"
+                  aria-invalid={Boolean(fieldError("phone"))}
+                  className={inputErrorClass(fieldError("phone"))}
                 />
               </Field>
             </div>
@@ -209,7 +248,7 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
               id="projectDescription"
               label="Project Description"
               required
-              error={submitAttempted ? errors.projectDescription : undefined}
+              error={descriptionError}
             >
               <Textarea
                 id="projectDescription"
@@ -217,19 +256,21 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
                 onChange={(e) =>
                   updateField("projectDescription", e.target.value)
                 }
+                onBlur={() => markTouched("projectDescription")}
                 placeholder="Tell me about your goals, timeline, and requirements..."
+                aria-invalid={Boolean(descriptionError)}
+                className={inputErrorClass(descriptionError)}
               />
-              <p className="text-xs text-muted">
-                {form.projectDescription.trim().length}/5 characters minimum
+              <p
+                className={cn(
+                  "text-xs text-right",
+                  descriptionError ? "text-red-400" : "text-muted"
+                )}
+              >
+                {descriptionLength}/5 characters minimum
               </p>
             </Field>
           </div>
-
-          {!isValid && !submitAttempted && missingFields.length > 0 && (
-            <p className="px-6 pt-2 text-xs text-muted">
-              Complete: {missingFields.join(", ")}
-            </p>
-          )}
 
           <div className="flex flex-col-reverse sm:flex-row gap-3 px-6 py-6 border-t border-white/[0.06] mt-2">
             <Button
@@ -262,27 +303,49 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
   );
 }
 
+function inputErrorClass(hasError?: string) {
+  return cn(
+    hasError &&
+      "border-red-500/70 focus-visible:border-red-500/70 focus-visible:ring-red-500/30"
+  );
+}
+
 function Field({
   id,
   label,
   required,
+  hint,
   error,
   children,
 }: {
   id: string;
   label: string;
   required?: boolean;
+  hint?: string;
   error?: string;
   children: React.ReactNode;
 }) {
   return (
-    <div className="space-y-2">
-      <Label htmlFor={id}>
-        {label}
-        {required && <span className="text-accent ml-1">*</span>}
-      </Label>
+    <div className="flex flex-col space-y-2">
+      <div className="flex items-baseline justify-between gap-2 min-h-[1.25rem]">
+        <Label htmlFor={id}>
+          {label}
+          {required && <span className="text-accent ml-1">*</span>}
+        </Label>
+        {hint && !error && (
+          <span className="text-[11px] text-muted shrink-0">{hint}</span>
+        )}
+      </div>
       {children}
-      {error && <p className="text-xs text-red-400">{error}</p>}
+      <p
+        className={cn(
+          "text-xs min-h-[1rem] leading-4",
+          error ? "text-red-400" : "text-transparent select-none"
+        )}
+        aria-live="polite"
+      >
+        {error || "\u00a0"}
+      </p>
     </div>
   );
 }

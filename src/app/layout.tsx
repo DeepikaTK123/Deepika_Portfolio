@@ -30,7 +30,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Deepika | Python Backend Developer",
   description:
-    "Premium portfolio of Deepika — a Python Backend Developer specializing in scalable APIs, cloud deployment, and high-performance systems. 4+ years of experience building digital products.",
+    "Portfolio of Deepika — Software Engineer with 4+ years of experience in Python backend development, REST APIs, AWS cloud deployment, and scalable enterprise systems.",
   keywords: [
     "Python Developer",
     "Backend Developer",

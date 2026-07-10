@@ -47,16 +47,16 @@ export function AboutSection() {
           <div className="space-y-16">
             <FadeIn delay={0.1}>
               <p className="text-lg text-muted leading-relaxed">
-                I&apos;m a passionate Python backend developer with over 4 years
-                of experience building scalable, high-performance systems. I
-                specialize in designing robust APIs, optimizing database
-                performance, and deploying cloud-native applications that handle
-                millions of requests.
+                Software Engineer with 4+ years of experience designing,
+                developing, and deploying scalable backend systems using Python
+                and modern cloud technologies. Strong expertise in RESTful APIs,
+                FastAPI, Flask, and Django.
               </p>
               <p className="mt-4 text-lg text-muted leading-relaxed">
-                My approach combines clean architecture principles with
-                pragmatic engineering — delivering solutions that are not just
-                functional, but elegant and maintainable.
+                Hands-on experience with AWS EC2 deployments, database design,
+                performance optimization, Docker containerization, and CI/CD
+                pipelines — delivering reliable enterprise applications with
+                cross-functional teams.
               </p>
             </FadeIn>
 
@@ -87,7 +87,7 @@ export function AboutSection() {
               <div className="space-y-8">
                 {experience.map((item, i) => (
                   <motion.div
-                    key={item.role}
+                    key={`${item.company}-${item.period}`}
                     className="relative pl-8 border-l border-white/[0.08]"
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
