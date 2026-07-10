@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import {
   Dialog,
@@ -115,13 +115,16 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-xl">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col max-h-[90vh]"
-        >
+      <AnimatePresence>
+        {open && (
+          <DialogContent className="sm:max-w-xl">
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col max-h-[90vh]"
+            >
           <DialogHeader>
             <DialogTitle>Book a Free Consultation</DialogTitle>
             <DialogDescription>
@@ -261,8 +264,10 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
               </Button>
             </div>
           </form>
-        </motion.div>
-      </DialogContent>
+            </motion.div>
+          </DialogContent>
+        )}
+      </AnimatePresence>
     </Dialog>
   );
 }

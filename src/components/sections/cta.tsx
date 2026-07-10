@@ -55,7 +55,7 @@ export function CTASection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <MagneticButton size="lg" onClick={openConsultation}>
+                <MagneticButton size="lg" type="button" onClick={openConsultation}>
                   <Calendar size={18} />
                   Book a Free Consultation
                 </MagneticButton>

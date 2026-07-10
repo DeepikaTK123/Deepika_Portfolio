@@ -25,7 +25,7 @@ export function Toast({ toast, onClose }: ToastProps) {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.96 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-6 left-1/2 z-[200] w-[calc(100%-2rem)] max-w-md -translate-x-1/2"
+          className="fixed bottom-6 left-1/2 z-[10060] w-[calc(100%-2rem)] max-w-md -translate-x-1/2"
           role="status"
           aria-live="polite"
         >

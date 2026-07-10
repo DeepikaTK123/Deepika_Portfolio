@@ -73,21 +73,21 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         <LoadingScreen />
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:px-4 focus:py-2 focus:bg-accent focus:text-white focus:rounded-full"
-        >
-          Skip to main content
-        </a>
-        <SmoothScroll>
-          <AppProviders>
+        <AppProviders>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:px-4 focus:py-2 focus:bg-accent focus:text-white focus:rounded-full"
+          >
+            Skip to main content
+          </a>
+          <SmoothScroll>
             <NoiseOverlay />
             <CursorGlow />
             <Navbar />
             <main id="main-content">{children}</main>
             <Footer />
-          </AppProviders>
-        </SmoothScroll>
+          </SmoothScroll>
+        </AppProviders>
       </body>
     </html>
   );

@@ -94,7 +94,7 @@ export function HeroSection() {
                     <ArrowRight size={18} />
                   </Link>
                 </MagneticButton>
-                <MagneticButton variant="secondary" size="lg" onClick={openConsultation}>
+                <MagneticButton variant="secondary" size="lg" type="button" onClick={openConsultation}>
                   <Calendar size={18} />
                   Book a Call
                 </MagneticButton>

@@ -30,7 +30,10 @@ export function ConsultationProvider({
   const closeConsultation = useCallback(() => setIsOpen(false), []);
 
   const showToast = useCallback((type: "success" | "error", message: string) => {
-    const id = crypto.randomUUID();
+    const id =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : String(Date.now());
     setToast({ id, type, message });
     window.setTimeout(() => {
       setToast((current) => (current?.id === id ? null : current));
