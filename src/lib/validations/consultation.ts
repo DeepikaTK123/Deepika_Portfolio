@@ -70,33 +70,3 @@ export function validateConsultationForm(
 export function isConsultationFormValid(data: ConsultationFormData): boolean {
   return Object.keys(validateConsultationForm(data)).length === 0;
 }
-
-export function validateConsultationPayload(
-  body: unknown
-): { success: true; data: ConsultationFormData } | { success: false; error: string } {
-  if (!body || typeof body !== "object") {
-    return { success: false, error: "Invalid request body." };
-  }
-
-  const payload = body as Record<string, unknown>;
-
-  const data: ConsultationFormData = {
-    fullName: String(payload.fullName ?? "").trim(),
-    email: String(payload.email ?? "").trim(),
-    phone: String(payload.phone ?? "").trim(),
-    companyName: String(payload.companyName ?? "").trim(),
-    projectType: String(payload.projectType ?? "") as ProjectType,
-    projectDescription: String(payload.projectDescription ?? "").trim(),
-  };
-
-  if (!PROJECT_TYPES.includes(data.projectType)) {
-    return { success: false, error: "Invalid project type." };
-  }
-
-  const errors = validateConsultationForm(data);
-  if (Object.keys(errors).length > 0) {
-    return { success: false, error: "Please complete all required fields." };
-  }
-
-  return { success: true, data };
-}

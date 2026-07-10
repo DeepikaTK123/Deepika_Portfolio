@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import emailjs from "@emailjs/browser";
 import { Loader2 } from "lucide-react";
 import {
   Dialog,
@@ -14,7 +15,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useConsultation } from "@/components/consultation/consultation-provider";
-import { getConsultationApiUrl } from "@/lib/consultation-api";
 import {
   PROJECT_TYPES,
   type ConsultationFormData,
@@ -22,6 +22,10 @@ import {
   validateConsultationForm,
 } from "@/lib/validations/consultation";
 import { cn } from "@/lib/utils";
+
+const EMAILJS_SERVICE_ID = "service_67ncm7a";
+const EMAILJS_TEMPLATE_ID = "template_87hn85u";
+const EMAILJS_PUBLIC_KEY = "ky548YqtPzUuTrjLn";
 
 const initialForm: ConsultationFormData = {
   fullName: "",
@@ -110,37 +114,31 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(getConsultationApiUrl(), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          full_name: form.fullName,
+          email: form.email,
+          phone: form.phone,
+          company: form.companyName,
+          project_type: form.projectType,
+          message: form.projectDescription,
+          time: new Date().toLocaleString(),
+        },
+        EMAILJS_PUBLIC_KEY
+      );
 
-      const data = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to send consultation request.");
-      }
-
+      setForm(initialForm);
+      setTouched({});
+      setSubmitAttempted(false);
       onOpenChange(false);
       showToast(
         "success",
-        "Thank you! Your consultation request has been sent successfully. I'll contact you soon."
+        "🎉 Thank you! Your consultation request has been sent successfully. I'll review your requirements and contact you within 24 hours."
       );
-    } catch (error) {
-      const isNetworkOrMissingApi =
-        error instanceof TypeError ||
-        (error instanceof Error &&
-          error.message === "Failed to send consultation request.");
-
-      showToast(
-        "error",
-        isNetworkOrMissingApi
-          ? "The consultation service is not connected yet. Please use Contact Me or email deepikakumar78910@gmail.com directly."
-          : error instanceof Error
-            ? error.message
-            : "Something went wrong. Please try again later."
-      );
+    } catch {
+      showToast("error", "Something went wrong. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
