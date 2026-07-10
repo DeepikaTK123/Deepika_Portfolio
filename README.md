@@ -52,14 +52,19 @@ git push -u origin main
 
 Replace `YOUR_USERNAME` and `YOUR_REPO_NAME` with your GitHub details.
 
-### Step 3 — Enable GitHub Pages
+### Step 3 — Enable GitHub Pages (required)
 
-1. Open your repo on GitHub
-2. Go to **Settings → Pages**
-3. Under **Build and deployment**, set **Source** to **GitHub Actions**
-4. After the workflow runs, your site will be live at:
-   - `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/` (project repo)
-   - `https://YOUR_USERNAME.github.io/` (if repo is named `YOUR_USERNAME.github.io`)
+1. Open **Settings → Pages**:  
+   https://github.com/DeepikaTK123/Deepika_Portfolio/settings/pages
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**
+3. Go to **Actions** tab → **Deploy to GitHub Pages** → **Run workflow** → **Run workflow**
+4. Wait 2–3 minutes until the workflow shows a green checkmark
+
+Your site will be live at:
+
+**https://deepikatk123.github.io/Deepika_Portfolio/**
+
+> If you see a 404, GitHub Pages is not enabled yet. Complete step 3 above, then re-run the workflow.
 
 ### Manual local export (optional)
 

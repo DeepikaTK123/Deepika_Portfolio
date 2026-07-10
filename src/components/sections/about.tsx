@@ -13,6 +13,7 @@ import {
   stats,
 } from "@/data/site";
 import { Badge } from "@/components/ui/badge";
+import { assetPath } from "@/lib/asset-path";
 
 export function AboutSection() {
   return (
@@ -31,7 +32,7 @@ export function AboutSection() {
           <FadeIn direction="left">
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden group">
               <Image
-                src="/images/deepika.png"
+                src={assetPath("/images/deepika.png")}
                 alt="Deepika - Python Backend Developer"
                 fill
                 className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
