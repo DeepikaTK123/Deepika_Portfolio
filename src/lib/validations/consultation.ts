@@ -26,7 +26,7 @@ export function isValidEmail(email: string): boolean {
 
 export function isValidPhone(phone: string): boolean {
   const digits = phone.replace(/\D/g, "");
-  return digits.length >= 10;
+  return digits.length >= 8;
 }
 
 export function validateConsultationForm(
@@ -58,9 +58,9 @@ export function validateConsultationForm(
 
   if (!data.projectDescription.trim()) {
     errors.projectDescription = "Project description is required.";
-  } else if (data.projectDescription.trim().length < 10) {
+  } else if (data.projectDescription.trim().length < 5) {
     errors.projectDescription =
-      "Please provide a bit more detail about your project.";
+      "Please add at least 5 characters about your project.";
   }
 
   return errors;
