@@ -6,17 +6,18 @@ import gsap from "gsap";
 import { TextReveal } from "@/components/effects/text-reveal";
 import { FadeIn } from "@/components/effects/fade-in";
 import { techStack } from "@/data/tech-stack";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 export function TechStackSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || reducedMotion) return;
 
     const items = container.querySelectorAll(".tech-icon");
-
-    items.forEach((item, i) => {
+    const tweens = Array.from(items).map((item, i) =>
       gsap.to(item, {
         y: Math.sin(i * 0.8) * 15,
         duration: 3 + (i % 3),
@@ -24,40 +25,47 @@ export function TechStackSection() {
         yoyo: true,
         ease: "sine.inOut",
         delay: i * 0.2,
-      });
-    });
-  }, []);
+      })
+    );
+
+    return () => {
+      tweens.forEach((tween) => tween.kill());
+    };
+  }, [reducedMotion]);
 
   return (
-    <section className="relative section-padding overflow-hidden" aria-label="Tech Stack">
+    <section
+      className="relative section-padding overflow-hidden"
+      aria-label="Tech Stack"
+    >
       <div className="container-wide">
-        <div className="text-center max-w-2xl mx-auto mb-20">
+        <div className="mx-auto mb-12 max-w-2xl text-center sm:mb-16 md:mb-20">
           <TextReveal
             text="Tech Stack"
             as="h2"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+            className="text-heading font-bold"
           />
           <FadeIn delay={0.2}>
-            <p className="mt-6 text-lg text-muted leading-relaxed">
-              Technologies and tools I use to build robust, scalable backend
-              systems.
+            <p className="mt-5 text-body text-muted sm:mt-6">
+              Technologies and tools I use to build robust, scalable web
+              applications and backend systems.
             </p>
           </FadeIn>
         </div>
 
         <div
           ref={containerRef}
-          className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 max-w-4xl mx-auto"
+          className="mx-auto grid max-w-4xl grid-cols-2 gap-3 xs:grid-cols-3 sm:grid-cols-4 sm:gap-4 md:grid-cols-6 md:gap-6"
         >
           {techStack.map((tech, i) => (
             <FadeIn key={tech.name} delay={i * 0.05}>
               <motion.div
-                className="tech-icon group flex flex-col items-center gap-3 p-6 rounded-2xl border border-white/[0.06] bg-card hover:border-white/[0.12] hover:bg-white/[0.02] transition-all duration-500 cursor-default"
-                whileHover={{ scale: 1.08, y: -4 }}
+                className="tech-icon group flex cursor-default flex-col items-center gap-2 rounded-2xl border border-white/[0.06] bg-card p-4 transition-all duration-500 hover:border-white/[0.12] hover:bg-white/[0.02] sm:gap-3 sm:p-6"
+                whileHover={reducedMotion ? undefined : { scale: 1.08, y: -4 }}
                 transition={{ duration: 0.3 }}
               >
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-transform duration-500 group-hover:scale-110"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold transition-transform duration-500 group-hover:scale-110 sm:h-12 sm:w-12"
                   style={{
                     backgroundColor: `${tech.color}15`,
                     color: tech.color,
@@ -66,7 +74,7 @@ export function TechStackSection() {
                 >
                   {tech.name.slice(0, 2)}
                 </div>
-                <span className="text-xs font-medium text-muted group-hover:text-foreground transition-colors text-center">
+                <span className="text-center text-[11px] font-medium text-muted transition-colors group-hover:text-foreground sm:text-xs">
                   {tech.name}
                 </span>
               </motion.div>

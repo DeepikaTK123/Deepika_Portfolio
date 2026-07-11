@@ -1,84 +1,94 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
-import { GitHubIcon, LinkedInIcon } from "@/components/icons/brand-icons";
+import { Mail, MapPin } from "lucide-react";
+import { LinkedInIcon } from "@/components/icons/brand-icons";
 import { Separator } from "@/components/ui/separator";
 import { FadeIn } from "@/components/effects/fade-in";
 import {
   contactEmail,
+  footerQuickLinks,
   linkedInUrl,
-  githubUrl,
+  siteConfig,
 } from "@/data/site";
 
-const footerLinks = [
-  {
-    label: contactEmail,
-    href: `mailto:${contactEmail}`,
-    icon: Mail,
-    external: false,
-  },
-  {
-    label: "LinkedIn",
-    href: linkedInUrl,
-    icon: LinkedInIcon,
-    external: true,
-  },
-  {
-    label: "GitHub",
-    href: githubUrl,
-    icon: GitHubIcon,
-    external: true,
-  },
-] as const;
-
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="relative border-t border-white/[0.06]" role="contentinfo">
-      <div className="section-padding !py-16">
+      <div className="section-padding !py-14 sm:!py-16">
         <div className="container-wide">
           <FadeIn>
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="grid gap-10 md:grid-cols-3 md:gap-12">
               <div className="text-center md:text-left">
                 <Link
                   href="#home"
                   className="text-xl font-semibold tracking-tight text-foreground"
                 >
-                  Deepika<span className="text-accent">.</span>
+                  Deepika TK<span className="text-accent">.</span>
                 </Link>
-                <p className="mt-2 text-muted text-sm">
-                  Python Backend Developer
+                <p className="mt-2 text-sm font-medium text-foreground/80">
+                  {siteConfig.role}
+                </p>
+                <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted md:mx-0 mx-auto">
+                  {siteConfig.tagline}
                 </p>
               </div>
 
-              <nav aria-label="Social links">
-                <ul className="flex items-center gap-6">
-                  {footerLinks.map((link) => (
-                    <li key={link.label}>
-                      <a
+              <div className="text-center">
+                <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-foreground">
+                  Quick Links
+                </h3>
+                <ul className="mt-5 flex flex-col items-center gap-3">
+                  {footerQuickLinks.map((link) => (
+                    <li key={link.href}>
+                      <Link
                         href={link.href}
-                        target={link.external ? "_blank" : undefined}
-                        rel={link.external ? "noopener noreferrer" : undefined}
-                        className="flex items-center gap-2 text-muted hover:text-foreground transition-colors duration-300"
-                        aria-label={link.label}
+                        className="text-sm text-muted transition-colors duration-300 hover:text-foreground"
                       >
-                        <link.icon size={18} />
-                        <span className="text-sm hidden sm:inline">
-                          {link.label}
-                        </span>
-                      </a>
+                        {link.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
-              </nav>
+              </div>
+
+              <div className="text-center md:text-right">
+                <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-foreground">
+                  Connect
+                </h3>
+                <ul className="mt-5 flex flex-col items-center gap-4 md:items-end">
+                  <li>
+                    <a
+                      href={`mailto:${contactEmail}`}
+                      className="inline-flex min-h-[44px] items-center gap-2 text-sm text-muted transition-colors duration-300 hover:text-foreground"
+                    >
+                      <Mail size={16} />
+                      Email
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={linkedInUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-[44px] items-center gap-2 text-sm text-muted transition-colors duration-300 hover:text-foreground"
+                    >
+                      <LinkedInIcon size={16} />
+                      LinkedIn
+                    </a>
+                  </li>
+                  <li className="inline-flex min-h-[44px] items-center gap-2 text-sm text-muted">
+                    <MapPin size={16} />
+                    Location
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <Separator className="my-8" />
 
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted">
-              <p>&copy; {currentYear} Deepika. All rights reserved.</p>
+            <div className="flex flex-col items-center justify-between gap-3 text-center text-sm text-muted sm:flex-row sm:text-left">
+              <p>&copy; 2026 Deepika TK. All Rights Reserved.</p>
               <p className="text-xs">
-                Crafted with precision. Built for performance.
+                Built with Next.js, React, TypeScript &amp; Tailwind CSS.
               </p>
             </div>
           </FadeIn>

@@ -1,19 +1,14 @@
-export interface TechItem {
-  name: string;
-  color: string;
-}
-
-export const techStack: TechItem[] = [
+export const techStack = [
   { name: "Python", color: "#3776AB" },
   { name: "Django", color: "#092E20" },
   { name: "FastAPI", color: "#009688" },
   { name: "Flask", color: "#000000" },
-  { name: "AWS", color: "#FF9900" },
-  { name: "Docker", color: "#2496ED" },
-  { name: "Kubernetes", color: "#326CE5" },
-  { name: "Redis", color: "#DC382D" },
-  { name: "RabbitMQ", color: "#FF6600" },
   { name: "PostgreSQL", color: "#4169E1" },
+  { name: "Redis", color: "#DC382D" },
+  { name: "Docker", color: "#2496ED" },
+  { name: "Next.js", color: "#FFFFFF" },
+  { name: "TypeScript", color: "#3178C6" },
+  { name: "REST APIs", color: "#3B82F6" },
+  { name: "SQL", color: "#F59E0B" },
   { name: "Git", color: "#F05032" },
-  { name: "GitHub Actions", color: "#2088FF" },
 ];

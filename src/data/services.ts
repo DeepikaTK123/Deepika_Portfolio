@@ -1,10 +1,8 @@
 import {
+  AppWindow,
+  LayoutDashboard,
   Server,
-  Code2,
-  Cloud,
-  Gauge,
-  Bot,
-  Wrench,
+  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 
@@ -17,45 +15,31 @@ export interface Service {
 
 export const services: Service[] = [
   {
+    id: "web-apps",
+    title: "Custom Web Application Development",
+    description:
+      "Transform your ideas into powerful, scalable, and user-friendly web applications tailored to your business needs. I build secure, high-performance solutions with clean architecture — ensuring reliability, maintainability, and a seamless experience for your users.",
+    icon: AppWindow,
+  },
+  {
+    id: "admin-dashboards",
+    title: "Admin Dashboard Development",
+    description:
+      "Modern, intuitive admin dashboards that simplify operations through centralized data management, reporting, analytics, and role-based access control. Designed to boost productivity and deliver clear, actionable insights for your team.",
+    icon: LayoutDashboard,
+  },
+  {
     id: "backend",
     title: "Backend Development",
     description:
-      "Robust, scalable server-side applications built with Python. Clean architecture, SOLID principles, and production-grade code quality.",
+      "Robust, scalable backend systems built with Python, Django, and FastAPI. From business logic and secure authentication to database integration and high-performance APIs, I create reliable server-side foundations that power modern web products.",
     icon: Server,
   },
   {
-    id: "api",
-    title: "API Development",
+    id: "enhancement",
+    title: "Existing Application Enhancement",
     description:
-      "RESTful and GraphQL APIs designed for performance and developer experience. Comprehensive documentation and versioning strategies.",
-    icon: Code2,
-  },
-  {
-    id: "cloud",
-    title: "Cloud Deployment",
-    description:
-      "End-to-end cloud infrastructure on AWS. Container orchestration with Kubernetes, auto-scaling, and infrastructure as code.",
-    icon: Cloud,
-  },
-  {
-    id: "performance",
-    title: "Performance Optimization",
-    description:
-      "Database query optimization, caching strategies, and load testing. Reduce latency and improve throughput at scale.",
-    icon: Gauge,
-  },
-  {
-    id: "automation",
-    title: "Automation",
-    description:
-      "CI/CD pipelines, automated testing, and deployment workflows. Reduce manual effort and accelerate delivery cycles.",
-    icon: Bot,
-  },
-  {
-    id: "maintenance",
-    title: "Maintenance",
-    description:
-      "Ongoing support, monitoring, security patches, and system health. Proactive maintenance to keep your systems running smoothly.",
-    icon: Wrench,
+      "Improve and extend your current applications by adding features, resolving issues, optimizing performance, and modernizing backend functionality. Enhance what you already have — without the cost and disruption of rebuilding from scratch.",
+    icon: Sparkles,
   },
 ];

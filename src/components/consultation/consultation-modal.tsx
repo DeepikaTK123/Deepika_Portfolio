@@ -179,7 +179,7 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="flex flex-col overflow-hidden">
-          <div className="overflow-y-auto px-6 pb-2 space-y-5 max-h-[55vh]">
+          <div className="max-h-[min(55dvh,55vh)] space-y-5 overflow-y-auto overscroll-contain px-4 pb-2 sm:px-6">
             <Field
               id="fullName"
               label="Full Name"
@@ -258,7 +258,7 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
                   updateField("projectType", e.target.value as ProjectType)
                 }
                 className={cn(
-                  "flex h-12 w-full rounded-2xl border border-white/[0.08] bg-white/[0.04] px-4 py-2 text-sm text-foreground backdrop-blur-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:border-accent/30"
+                  "flex h-12 min-h-[44px] w-full rounded-2xl border border-white/[0.08] bg-white/[0.04] px-4 py-2 text-base text-foreground backdrop-blur-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:border-accent/30 md:text-sm"
                 )}
               >
                 {PROJECT_TYPES.map((type) => (
@@ -297,7 +297,7 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
             </Field>
           </div>
 
-          <div className="flex flex-col-reverse sm:flex-row gap-3 px-6 py-6 border-t border-white/[0.06] mt-2">
+          <div className="mt-2 flex flex-col-reverse gap-3 border-t border-white/[0.06] px-4 py-5 sm:flex-row sm:px-6 sm:py-6">
             <Button
               type="button"
               variant="secondary"

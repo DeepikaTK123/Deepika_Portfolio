@@ -2,7 +2,7 @@ export interface Testimonial {
   id: string;
   name: string;
   role: string;
-  company: string;
+  company?: string;
   content: string;
   avatar: string;
   rating: number;
@@ -11,52 +11,49 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     id: "1",
-    name: "Sarah Mitchell",
-    role: "CTO",
-    company: "TechFlow Inc",
+    name: "Aarav Sharma",
+    role: "Founder",
+    company: "TechNova Solutions",
     content:
-      "Deepika transformed our backend infrastructure from a monolith to a scalable microservices architecture. The performance improvements were immediate — our API response times dropped by 60%. Exceptional engineering skills.",
-    avatar: "SM",
+      "Working with Deepika was a fantastic experience. She quickly understood our business requirements and delivered a secure, scalable web application that exceeded our expectations. The communication was clear, and every milestone was delivered on time.",
+    avatar: "AS",
     rating: 5,
   },
   {
     id: "2",
-    name: "James Chen",
-    role: "Product Manager",
-    company: "DataSync Solutions",
+    name: "Priya Nair",
+    role: "Operations Manager",
     content:
-      "Working with Deepika was a game-changer for our document management platform. She delivered ahead of schedule, with clean code and comprehensive documentation. A true professional who understands both technology and business.",
-    avatar: "JC",
+      "Deepika developed a modern admin dashboard that significantly improved the way we manage our daily operations. The interface is intuitive, fast, and exactly what our team needed.",
+    avatar: "PN",
     rating: 5,
   },
   {
     id: "3",
-    name: "Emily Rodriguez",
-    role: "Engineering Lead",
-    company: "CloudScale",
+    name: "Rahul Verma",
+    role: "Product Manager",
     content:
-      "Deepika's expertise in Python and cloud architecture helped us scale from 1,000 to 100,000 users without a hitch. Her attention to detail and proactive communication made the entire process seamless.",
-    avatar: "ER",
+      "Our backend was redesigned with clean architecture and optimized APIs. The application became more reliable, easier to maintain, and performed exceptionally well under heavy usage.",
+    avatar: "RV",
     rating: 5,
   },
   {
     id: "4",
-    name: "Michael Park",
-    role: "Founder",
-    company: "FinTrack",
+    name: "Sneha Reddy",
+    role: "Business Owner",
     content:
-      "The expense tracker Deepika built for us exceeded all expectations. The AI categorization feature alone saved our team 20 hours per week. I wouldn't hesitate to recommend her for any backend project.",
-    avatar: "MP",
+      "We approached Deepika to enhance our existing application with new features and performance improvements. The work was completed professionally, and the quality of the implementation was outstanding.",
+    avatar: "SR",
     rating: 5,
   },
   {
     id: "5",
-    name: "Lisa Thompson",
-    role: "VP Engineering",
-    company: "Analytics Pro",
+    name: "Vikram Patel",
+    role: "CEO",
+    company: "Innovate Digital",
     content:
-      "Deepika architected our real-time analytics platform that now processes millions of events daily. Her system design skills are top-notch, and she consistently delivers production-ready solutions.",
-    avatar: "LT",
+      "From understanding our requirements to delivering the final product, the entire process was smooth and transparent. We highly recommend Deepika for anyone looking for a reliable backend and web application developer.",
+    avatar: "VP",
     rating: 5,
   },
 ];

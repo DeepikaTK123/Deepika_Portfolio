@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { MagneticButton } from "@/components/effects/magnetic-button";
 import { GradientBlob } from "@/components/effects/gradient-blob";
 import { DeveloperIllustration } from "@/components/illustrations/developer-illustration";
-import { heroSkills } from "@/data/site";
-import { cn } from "@/lib/utils";
+import { heroFeatures } from "@/data/site";
 import { useConsultation } from "@/components/consultation/consultation-provider";
 
 export function HeroSection() {
@@ -16,128 +15,146 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative flex min-h-[100svh] items-center overflow-hidden"
       aria-label="Hero"
     >
-      <GradientBlob className="top-[-10%] left-[-10%]" color="rgba(59,130,246,0.12)" size="700px" />
-      <GradientBlob className="bottom-[-20%] right-[-10%]" color="rgba(59,130,246,0.08)" size="500px" delay={2} />
-      <GradientBlob className="top-[30%] right-[20%]" color="rgba(34,197,94,0.05)" size="400px" delay={4} />
+      <GradientBlob
+        className="left-[-10%] top-[-10%]"
+        color="rgba(59,130,246,0.12)"
+        size="700px"
+      />
+      <GradientBlob
+        className="bottom-[-20%] right-[-10%]"
+        color="rgba(59,130,246,0.08)"
+        size="500px"
+        delay={2}
+      />
+      <GradientBlob
+        className="right-[20%] top-[30%]"
+        color="rgba(34,197,94,0.05)"
+        size="400px"
+        delay={4}
+      />
 
-      <div className="section-padding w-full pt-32 pb-20">
+      <div className="section-padding w-full pb-16 pt-28 sm:pb-20 sm:pt-32 md:pt-36">
         <div className="container-wide">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-8 items-center">
-            {/* Left Content */}
-            <div className="max-w-2xl">
+          <div className="grid items-center gap-10 md:gap-12 lg:grid-cols-2 lg:gap-10">
+            <div className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 2.4 }}
+                className="flex justify-center lg:justify-start"
               >
-                <Badge variant="accent" className="mb-8">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse mr-2" />
-                  Python Backend Developer
+                <Badge variant="accent" className="mb-6 sm:mb-8">
+                  <span className="mr-2" aria-hidden="true">
+                    ✨
+                  </span>
+                  Available for Freelance Projects
                 </Badge>
               </motion.div>
 
               <motion.h1
-                className="text-hero-sm md:text-5xl lg:text-hero font-bold tracking-tight text-balance"
+                className="text-hero font-bold text-balance"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 2.5, ease: [0.16, 1, 0.3, 1] }}
+                transition={{
+                  duration: 0.8,
+                  delay: 2.5,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
               >
-                Building Scalable
-                <br />
-                <span className="text-gradient">Digital Products.</span>
+                Building Modern Web Applications That{" "}
+                <span className="text-gradient">Drive Business Growth</span>
               </motion.h1>
 
-              <motion.div
-                className="flex flex-wrap gap-3 mt-6"
+              <motion.p
+                className="mx-auto mt-6 max-w-xl text-body text-muted sm:mt-8 lg:mx-0"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 2.7 }}
               >
-                {["Fast.", "Secure.", "Beautiful."].map((word, i) => (
-                  <span
-                    key={word}
-                    className={cn(
-                      "text-xl md:text-2xl font-medium",
-                      i === 0 && "text-accent",
-                      i === 1 && "text-success",
-                      i === 2 && "text-foreground"
-                    )}
-                  >
-                    {word}
-                  </span>
-                ))}
-              </motion.div>
+                I help startups, businesses, and entrepreneurs build secure,
+                scalable, and high-performance web applications that solve real
+                business problems.
+              </motion.p>
 
-              <motion.p
-                className="mt-8 text-muted text-lg leading-relaxed max-w-lg"
+              <motion.div
+                className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 2.9 }}
               >
-                I design and deploy scalable backend systems using Python,
-                FastAPI, Flask, and Django — from REST APIs and microservices
-                to AWS cloud infrastructure and CI/CD automation.
-              </motion.p>
-
-              <motion.div
-                className="flex flex-wrap gap-4 mt-10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 3.1 }}
-              >
-                <MagneticButton asChild size="lg">
+                <MagneticButton asChild size="lg" className="w-full sm:w-auto">
                   <Link href="#projects">
                     View Projects
                     <ArrowRight size={18} />
                   </Link>
                 </MagneticButton>
-                <MagneticButton variant="secondary" size="lg" type="button" onClick={openConsultation}>
+                <MagneticButton
+                  variant="secondary"
+                  size="lg"
+                  type="button"
+                  className="w-full sm:w-auto"
+                  onClick={openConsultation}
+                >
                   <Calendar size={18} />
                   Book a Call
                 </MagneticButton>
               </motion.div>
+
+              <motion.ul
+                className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:justify-center lg:items-start lg:justify-start"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 3.1 }}
+              >
+                {heroFeatures.map((feature) => (
+                  <li
+                    key={feature}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3.5 py-2 text-sm text-muted backdrop-blur-sm"
+                  >
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-success/15 text-success">
+                      <Check className="h-3 w-3" strokeWidth={3} />
+                    </span>
+                    <span className="font-medium text-foreground/90">
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </motion.ul>
             </div>
 
-            {/* Right Content */}
             <motion.div
-              className="relative"
+              className="relative mx-auto w-full max-w-lg lg:max-w-none"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 2.6, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 1,
+                delay: 2.6,
+                ease: [0.16, 1, 0.3, 1],
+              }}
             >
               <DeveloperIllustration />
 
-              {/* Glass Card */}
               <motion.div
-                className="absolute bottom-4 left-0 right-0 mx-auto w-fit glass rounded-2xl p-6"
+                className="absolute bottom-2 left-2 right-2 mx-auto w-auto max-w-sm glass rounded-2xl p-4 sm:bottom-4 sm:left-0 sm:right-0 sm:w-fit sm:p-6"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 3.3 }}
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
-                    <span className="text-accent font-bold text-sm">4+</span>
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">
-                      Years Experience
-                    </p>
-                    <p className="text-xs text-muted">Backend Engineering</p>
-                  </div>
+                <div className="mb-2 flex items-center gap-3">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-success" />
+                  </span>
+                  <p className="text-sm font-semibold text-foreground">
+                    Open for new projects
+                  </p>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {heroSkills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 text-xs font-medium rounded-full bg-white/[0.04] border border-white/[0.06] text-muted"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+                <p className="text-xs text-muted">
+                  Custom apps · Dashboards · Backend systems
+                </p>
               </motion.div>
             </motion.div>
           </div>

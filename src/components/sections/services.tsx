@@ -14,45 +14,52 @@ export function ServicesSection() {
       aria-label="Services"
     >
       <div className="container-wide">
-        <div className="max-w-2xl mb-20">
+        <div className="mb-12 max-w-2xl sm:mb-16 md:mb-20">
           <TextReveal
             text="Services"
             as="h2"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+            className="text-heading font-bold"
           />
           <FadeIn delay={0.2}>
-            <p className="mt-6 text-lg text-muted leading-relaxed">
-              End-to-end backend solutions tailored to your business needs.
-              From architecture to deployment, I handle every layer of your
-              infrastructure.
+            <p className="mt-5 text-body text-muted sm:mt-6">
+              Premium digital solutions designed to help businesses grow —
+              from custom web applications and dashboards to scalable backends
+              and thoughtful product enhancements.
             </p>
           </FadeIn>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:gap-8">
           {services.map((service, i) => (
-            <FadeIn key={service.id} delay={i * 0.08}>
+            <FadeIn key={service.id} delay={i * 0.1}>
               <motion.div
                 className={cn(
-                  "group relative h-full p-8 rounded-3xl border border-white/[0.06] bg-card",
+                  "group relative h-full rounded-3xl border border-white/[0.06] bg-card p-6 sm:p-8 md:p-10",
                   "hover:border-white/[0.12] hover:bg-white/[0.02]",
                   "transition-all duration-500"
                 )}
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-accent/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-accent/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative">
-                  <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors duration-500">
-                    <service.icon className="w-5 h-5 text-accent" />
-                  </div>
+                  <motion.div
+                    className="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-7"
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <service.icon
+                      className="w-6 h-6 text-accent transition-transform duration-500 group-hover:scale-110"
+                      strokeWidth={1.5}
+                    />
+                  </motion.div>
 
-                  <h3 className="text-xl font-semibold tracking-tight text-foreground mb-3">
+                  <h3 className="text-xl md:text-[1.35rem] font-semibold tracking-tight text-foreground mb-4 leading-snug">
                     {service.title}
                   </h3>
 
-                  <p className="text-muted leading-relaxed">
+                  <p className="text-muted leading-relaxed text-[0.95rem] md:text-base">
                     {service.description}
                   </p>
                 </div>

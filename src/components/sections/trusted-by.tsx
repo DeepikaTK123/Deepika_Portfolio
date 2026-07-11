@@ -15,8 +15,8 @@ export function TrustedBySection() {
       </FadeIn>
 
       <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
+        <div className="absolute bottom-0 left-0 top-0 z-10 w-12 bg-gradient-to-r from-background to-transparent sm:w-24 md:w-32" />
+        <div className="absolute bottom-0 right-0 top-0 z-10 w-12 bg-gradient-to-l from-background to-transparent sm:w-24 md:w-32" />
 
         <div className="flex animate-marquee">
           {items.map((tech, i) => (

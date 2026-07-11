@@ -24,7 +24,11 @@ const config: Config = {
       },
       fontSize: {
         hero: ["4.5rem", { lineHeight: "1.05", letterSpacing: "-0.03em" }],
-        "hero-sm": ["2.75rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
+        "hero-md": ["3.5rem", { lineHeight: "1.08", letterSpacing: "-0.025em" }],
+        "hero-sm": ["2.25rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
+      },
+      screens: {
+        xs: "390px",
       },
       borderRadius: {
         "2xl": "1rem",

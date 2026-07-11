@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
 interface TextRevealProps {
@@ -18,8 +19,9 @@ export function TextReveal({
   as: Component = "h2",
 }: TextRevealProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const controls = useAnimation();
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     if (isInView) {
@@ -28,6 +30,10 @@ export function TextReveal({
   }, [isInView, controls]);
 
   const words = text.split(" ");
+
+  if (reducedMotion) {
+    return <Component className={cn(className)}>{text}</Component>;
+  }
 
   return (
     <Component ref={ref} className={cn("overflow-hidden", className)}>
@@ -45,7 +51,7 @@ export function TextReveal({
         }}
       >
         {words.map((word, i) => (
-          <span key={i} className="inline-block overflow-hidden mr-[0.25em]">
+          <span key={`${word}-${i}`} className="mr-[0.25em] inline-block overflow-hidden">
             <motion.span
               className="inline-block"
               variants={{

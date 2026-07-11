@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
 interface FadeInProps {
@@ -28,17 +29,18 @@ export function FadeIn({
   direction = "up",
   once = true,
 }: FadeInProps) {
-  const offset = directionOffset[direction];
+  const reducedMotion = useReducedMotion();
+  const offset = reducedMotion ? {} : directionOffset[direction];
 
   const variants: Variants = {
-    hidden: { opacity: 0, ...offset },
+    hidden: { opacity: reducedMotion ? 1 : 0, ...offset },
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
       transition: {
-        duration,
-        delay,
+        duration: reducedMotion ? 0 : duration,
+        delay: reducedMotion ? 0 : delay,
         ease: [0.16, 1, 0.3, 1],
       },
     },
@@ -49,7 +51,7 @@ export function FadeIn({
       className={cn(className)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, margin: "-80px" }}
+      viewport={{ once, margin: "-60px" }}
       variants={variants}
     >
       {children}

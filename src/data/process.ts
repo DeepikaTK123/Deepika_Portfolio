@@ -1,15 +1,15 @@
 import {
-  Search,
-  Layers,
+  MessageCircle,
+  PenLine,
   Code2,
-  TestTube,
-  Rocket,
-  Shield,
+  ShieldCheck,
+  PackageCheck,
   type LucideIcon,
 } from "lucide-react";
 
 export interface ProcessStep {
   id: string;
+  number: string;
   title: string;
   description: string;
   icon: LucideIcon;
@@ -17,45 +17,43 @@ export interface ProcessStep {
 
 export const processSteps: ProcessStep[] = [
   {
-    id: "discovery",
-    title: "Discovery",
+    id: "requirements",
+    number: "01",
+    title: "Requirement Discussion",
     description:
-      "Understanding your business goals, technical requirements, and constraints. Deep dive into existing systems and identify opportunities.",
-    icon: Search,
+      "We discuss your goals, users, and business challenges so the solution is aligned from day one.",
+    icon: MessageCircle,
   },
   {
-    id: "architecture",
-    title: "Architecture",
+    id: "planning",
+    number: "02",
+    title: "Planning & Solution Design",
     description:
-      "Designing scalable system architecture, database schemas, and API contracts. Creating detailed technical specifications.",
-    icon: Layers,
+      "I map out the architecture, features, and delivery plan with clear milestones and priorities.",
+    icon: PenLine,
   },
   {
     id: "development",
+    number: "03",
     title: "Development",
     description:
-      "Building with clean, tested code following best practices. Regular progress updates and iterative delivery of features.",
+      "Your application is built with clean architecture, secure backend logic, and a polished user experience.",
     icon: Code2,
   },
   {
     id: "testing",
-    title: "Testing",
+    number: "04",
+    title: "Testing & Quality Assurance",
     description:
-      "Comprehensive testing including unit, integration, and load tests. Ensuring reliability, security, and performance standards.",
-    icon: TestTube,
+      "Every feature is carefully tested for reliability, performance, and a smooth end-user experience.",
+    icon: ShieldCheck,
   },
   {
-    id: "deployment",
-    title: "Deployment",
+    id: "delivery",
+    number: "05",
+    title: "Project Delivery",
     description:
-      "Smooth deployment to production with zero downtime. CI/CD pipeline setup and infrastructure provisioning.",
-    icon: Rocket,
-  },
-  {
-    id: "maintenance",
-    title: "Maintenance",
-    description:
-      "Ongoing monitoring, optimization, and support. Proactive maintenance to ensure long-term system health.",
-    icon: Shield,
+      "You receive a production-ready application, complete source code, and a clear handover.",
+    icon: PackageCheck,
   },
 ];

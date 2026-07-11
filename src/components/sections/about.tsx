@@ -7,6 +7,7 @@ import { FadeIn } from "@/components/effects/fade-in";
 import { AnimatedCounter } from "@/components/effects/animated-counter";
 import { GradientBlob } from "@/components/effects/gradient-blob";
 import {
+  aboutParagraphs,
   experience,
   education,
   skills,
@@ -24,54 +25,54 @@ export function AboutSection() {
         <TextReveal
           text="Who I Am"
           as="h2"
-          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-20"
+          className="mb-12 text-heading font-bold sm:mb-16 md:mb-20"
         />
 
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-24">
           {/* Image */}
           <FadeIn direction="left">
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden group">
+            <div className="group relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-2xl sm:rounded-3xl lg:mx-0 lg:max-w-none">
               <Image
                 src={assetPath("/images/deepika.jpg")}
-                alt="Deepika - Python Backend Developer"
+                alt="Deepika - Software Engineer building modern web applications"
                 fill
-                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority={false}
+                className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 50vw"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
             </div>
           </FadeIn>
 
           {/* Content */}
-          <div className="space-y-16">
+          <div className="min-w-0 space-y-12 sm:space-y-14 md:space-y-16">
             <FadeIn delay={0.1}>
-              <p className="text-lg text-muted leading-relaxed">
-                Software Engineer with 4+ years of experience designing,
-                developing, and deploying scalable backend systems using Python
-                and modern cloud technologies. Strong expertise in RESTful APIs,
-                FastAPI, Flask, and Django.
-              </p>
-              <p className="mt-4 text-lg text-muted leading-relaxed">
-                Hands-on experience with AWS EC2 deployments, database design,
-                performance optimization, Docker containerization, and CI/CD
-                pipelines — delivering reliable enterprise applications with
-                cross-functional teams.
-              </p>
+              {aboutParagraphs.map((paragraph, index) => (
+                <p
+                  key={paragraph.slice(0, 24)}
+                  className={
+                    index === 0
+                      ? "text-body text-muted"
+                      : "mt-4 text-body text-muted"
+                  }
+                >
+                  {paragraph}
+                </p>
+              ))}
             </FadeIn>
 
             {/* Stats */}
             <FadeIn delay={0.2}>
-              <div className="grid grid-cols-3 gap-8">
+              <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8">
                 {stats.map((stat) => (
                   <div key={stat.label} className="text-center lg:text-left">
-                    <div className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+                    <div className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
                       <AnimatedCounter
                         value={stat.value}
                         suffix={stat.suffix}
                       />
                     </div>
-                    <p className="mt-2 text-sm text-muted font-medium">
+                    <p className="mt-2 text-[11px] font-medium leading-snug tracking-wide text-muted sm:text-xs md:text-sm">
                       {stat.label}
                     </p>
                   </div>
@@ -117,26 +118,28 @@ export function AboutSection() {
               <h3 className="text-2xl font-semibold tracking-tight mb-8">
                 Education
               </h3>
-              {education.map((item) => (
-                <div
-                  key={item.degree}
-                  className="relative pl-8 border-l border-white/[0.08]"
-                >
-                  <div className="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-success border-2 border-background" />
-                  <span className="text-xs font-medium text-success tracking-wide">
-                    {item.period}
-                  </span>
-                  <h4 className="mt-1 text-lg font-semibold text-foreground">
-                    {item.degree}
-                  </h4>
-                  <p className="text-sm text-muted font-medium">
-                    {item.institution}
-                  </p>
-                  <p className="mt-2 text-sm text-muted leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
+              <div className="space-y-8">
+                {education.map((item) => (
+                  <div
+                    key={item.degree}
+                    className="relative pl-8 border-l border-white/[0.08]"
+                  >
+                    <div className="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-success border-2 border-background" />
+                    <span className="text-xs font-medium text-success tracking-wide">
+                      {item.period}
+                    </span>
+                    <h4 className="mt-1 text-lg font-semibold text-foreground">
+                      {item.degree}
+                    </h4>
+                    <p className="text-sm text-muted font-medium">
+                      {item.institution}
+                    </p>
+                    <p className="mt-2 text-sm text-muted leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </FadeIn>
 
             {/* Skills */}

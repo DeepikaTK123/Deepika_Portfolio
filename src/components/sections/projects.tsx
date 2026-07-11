@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { GitHubIcon } from "@/components/icons/brand-icons";
 import { TextReveal } from "@/components/effects/text-reveal";
 import { FadeIn } from "@/components/effects/fade-in";
 import { MagneticButton } from "@/components/effects/magnetic-button";
@@ -21,21 +20,21 @@ export function ProjectsSection() {
       aria-label="Projects"
     >
       <div className="container-wide">
-        <div className="max-w-2xl mb-20">
+        <div className="mb-12 max-w-2xl sm:mb-16 md:mb-20">
           <TextReveal
             text="Featured Projects"
             as="h2"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+            className="text-heading font-bold"
           />
           <FadeIn delay={0.2}>
-            <p className="mt-6 text-lg text-muted leading-relaxed">
+            <p className="mt-5 text-body text-muted sm:mt-6">
               A selection of projects showcasing scalable backend architecture,
               performance optimization, and clean engineering practices.
             </p>
           </FadeIn>
         </div>
 
-        <div className="space-y-32">
+        <div className="space-y-20 sm:space-y-28 md:space-y-32">
           {projects.map((project, index) => {
             const isReversed = index % 2 !== 0;
 
@@ -43,14 +42,14 @@ export function ProjectsSection() {
               <FadeIn key={project.id} delay={0.1}>
                 <article
                   className={cn(
-                    "grid lg:grid-cols-2 gap-12 lg:gap-16 items-center",
+                    "grid items-center gap-8 md:gap-12 lg:grid-cols-2 lg:gap-16",
                     isReversed && "lg:direction-rtl"
                   )}
                 >
                   {/* Image */}
                   <motion.div
                     className={cn(
-                      "relative aspect-[16/10] rounded-3xl overflow-hidden group",
+                      "group relative aspect-[16/10] overflow-hidden rounded-2xl sm:rounded-3xl",
                       isReversed && "lg:order-2"
                     )}
                     whileHover={{ scale: 1.02 }}
@@ -61,16 +60,16 @@ export function ProjectsSection() {
                       alt={project.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 50vw"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
-                    <div className="absolute inset-0 border border-white/[0.06] rounded-3xl" />
+                    <div className="absolute inset-0 rounded-2xl border border-white/[0.06] sm:rounded-3xl" />
                   </motion.div>
 
                   {/* Content */}
-                  <div className={cn(isReversed && "lg:order-1")}>
-                    <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+                  <div className={cn("min-w-0", isReversed && "lg:order-1")}>
+                    <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
                       {project.title}
                     </h3>
 
@@ -79,7 +78,7 @@ export function ProjectsSection() {
                     </p>
 
                     {/* Tech Stack */}
-                    <div className="flex flex-wrap gap-2 mt-6">
+                    <div className="mt-6 flex flex-wrap gap-2">
                       {project.techStack.map((tech) => (
                         <Badge key={tech} variant="accent">
                           {tech}
@@ -88,34 +87,34 @@ export function ProjectsSection() {
                     </div>
 
                     {/* Challenges & Solutions */}
-                    <div className="grid sm:grid-cols-2 gap-6 mt-8">
+                    <div className="mt-8 grid gap-6 sm:grid-cols-2">
                       <div>
-                        <h4 className="text-sm font-semibold text-foreground mb-3 uppercase tracking-wider">
+                        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
                           Challenges
                         </h4>
                         <ul className="space-y-2">
                           {project.challenges.map((item) => (
                             <li
                               key={item}
-                              className="text-sm text-muted flex items-start gap-2"
+                              className="flex items-start gap-2 text-sm text-muted"
                             >
-                              <span className="w-1 h-1 rounded-full bg-accent mt-2.5 shrink-0" />
+                              <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
                               {item}
                             </li>
                           ))}
                         </ul>
                       </div>
                       <div>
-                        <h4 className="text-sm font-semibold text-foreground mb-3 uppercase tracking-wider">
+                        <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
                           Solutions
                         </h4>
                         <ul className="space-y-2">
                           {project.solutions.map((item) => (
                             <li
                               key={item}
-                              className="text-sm text-muted flex items-start gap-2"
+                              className="flex items-start gap-2 text-sm text-muted"
                             >
-                              <span className="w-1 h-1 rounded-full bg-success mt-2.5 shrink-0" />
+                              <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-success" />
                               {item}
                             </li>
                           ))}
@@ -124,15 +123,15 @@ export function ProjectsSection() {
                     </div>
 
                     {/* Performance */}
-                    <div className="mt-6 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
-                      <h4 className="text-sm font-semibold text-foreground mb-3 uppercase tracking-wider">
+                    <div className="mt-6 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4">
+                      <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
                         Performance Improvements
                       </h4>
                       <div className="flex flex-wrap gap-3">
                         {project.performance.map((item) => (
                           <span
                             key={item}
-                            className="text-xs font-medium text-success bg-success/10 px-3 py-1.5 rounded-full border border-success/20"
+                            className="rounded-full border border-success/20 bg-success/10 px-3 py-1.5 text-xs font-medium text-success"
                           >
                             {item}
                           </span>
@@ -141,18 +140,14 @@ export function ProjectsSection() {
                     </div>
 
                     {/* Buttons */}
-                    <div className="flex flex-wrap gap-4 mt-8">
-                      <MagneticButton type="button" onClick={openProjectAccess}>
-                        View Project
-                        <ArrowUpRight size={16} />
-                      </MagneticButton>
+                    <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
                       <MagneticButton
-                        variant="secondary"
                         type="button"
+                        className="w-full sm:w-auto"
                         onClick={openProjectAccess}
                       >
-                        <GitHubIcon size={16} />
-                        GitHub
+                        View Project
+                        <ArrowUpRight size={16} />
                       </MagneticButton>
                     </div>
                   </div>
