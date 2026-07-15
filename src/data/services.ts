@@ -11,6 +11,10 @@ export interface Service {
   title: string;
   description: string;
   icon: LucideIcon;
+  badge?: "HIGHLY REQUESTED" | "POPULAR";
+  badgeTone?: "cyan" | "purple";
+  capabilities: string[];
+  stack: string[];
 }
 
 export const services: Service[] = [
@@ -18,28 +22,60 @@ export const services: Service[] = [
     id: "web-apps",
     title: "Custom Web Application Development",
     description:
-      "Transform your ideas into powerful, scalable, and user-friendly web applications tailored to your business needs. I build secure, high-performance solutions with clean architecture — ensuring reliability, maintainability, and a seamless experience for your users.",
+      "Transform your ideas into powerful, scalable, and user-friendly web applications tailored to your business needs.",
     icon: AppWindow,
+    badge: "HIGHLY REQUESTED",
+    badgeTone: "cyan",
+    capabilities: [
+      "End-to-end product flows",
+      "Secure authentication",
+      "Responsive UI & UX",
+      "API integrations",
+    ],
+    stack: ["Python", "FastAPI", "Django", "PostgreSQL", "React"],
   },
   {
     id: "admin-dashboards",
     title: "Admin Dashboard Development",
     description:
-      "Modern, intuitive admin dashboards that simplify operations through centralized data management, reporting, analytics, and role-based access control. Designed to boost productivity and deliver clear, actionable insights for your team.",
+      "Modern, intuitive dashboards that centralize operations, reporting, analytics, and role-based access control.",
     icon: LayoutDashboard,
+    badge: "POPULAR",
+    badgeTone: "purple",
+    capabilities: [
+      "Role-based permissions",
+      "Analytics & reporting",
+      "Data tables & filters",
+      "Operational workflows",
+    ],
+    stack: ["FastAPI", "Django", "PostgreSQL", "Redis", "Charts"],
   },
   {
     id: "backend",
     title: "Backend Development",
     description:
-      "Robust, scalable backend systems built with Python, Django, and FastAPI. From business logic and secure authentication to database integration and high-performance APIs, I create reliable server-side foundations that power modern web products.",
+      "Robust backend systems with clean architecture, secure APIs, and reliable business logic for modern web products.",
     icon: Server,
+    capabilities: [
+      "REST API design",
+      "Auth & authorization",
+      "Database modeling",
+      "Performance tuning",
+    ],
+    stack: ["Python", "FastAPI", "Django", "SQL", "PostgreSQL"],
   },
   {
     id: "enhancement",
     title: "Existing Application Enhancement",
     description:
-      "Improve and extend your current applications by adding features, resolving issues, optimizing performance, and modernizing backend functionality. Enhance what you already have — without the cost and disruption of rebuilding from scratch.",
+      "Improve and extend your current apps with features, bug fixes, performance gains, and backend modernization.",
     icon: Sparkles,
+    capabilities: [
+      "Feature additions",
+      "Bug fixes & stability",
+      "Refactoring",
+      "Performance upgrades",
+    ],
+    stack: ["Python", "Legacy migrations", "SQL", "API upgrades"],
   },
 ];

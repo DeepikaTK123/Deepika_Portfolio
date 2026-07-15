@@ -12,6 +12,8 @@ export interface ProcessStep {
   number: string;
   title: string;
   description: string;
+  duration: string;
+  deliverables: string[];
   icon: LucideIcon;
 }
 
@@ -21,7 +23,13 @@ export const processSteps: ProcessStep[] = [
     number: "01",
     title: "Requirement Discussion",
     description:
-      "We discuss your goals, users, and business challenges so the solution is aligned from day one.",
+      "We align on your business goals, users, and constraints so the solution starts with clarity — not assumptions.",
+    duration: "1–3 days",
+    deliverables: [
+      "Discovery call notes",
+      "Priority use cases",
+      "Success criteria",
+    ],
     icon: MessageCircle,
   },
   {
@@ -29,7 +37,13 @@ export const processSteps: ProcessStep[] = [
     number: "02",
     title: "Planning & Solution Design",
     description:
-      "I map out the architecture, features, and delivery plan with clear milestones and priorities.",
+      "I map architecture, features, and milestones so you know what ships when — and what can wait.",
+    duration: "2–5 days",
+    deliverables: [
+      "Solution outline",
+      "Feature breakdown",
+      "Delivery roadmap",
+    ],
     icon: PenLine,
   },
   {
@@ -38,6 +52,12 @@ export const processSteps: ProcessStep[] = [
     title: "Development",
     description:
       "Your application is built with clean architecture, secure backend logic, and a polished user experience.",
+    duration: "1–6 weeks",
+    deliverables: [
+      "Working feature increments",
+      "Secure APIs & data models",
+      "Regular demos",
+    ],
     icon: Code2,
   },
   {
@@ -45,7 +65,13 @@ export const processSteps: ProcessStep[] = [
     number: "04",
     title: "Testing & Quality Assurance",
     description:
-      "Every feature is carefully tested for reliability, performance, and a smooth end-user experience.",
+      "Features are verified for reliability, performance, and a smooth experience before you go live.",
+    duration: "2–5 days",
+    deliverables: [
+      "Bug fixes & polish",
+      "Regression checks",
+      "Release-ready build",
+    ],
     icon: ShieldCheck,
   },
   {
@@ -54,6 +80,12 @@ export const processSteps: ProcessStep[] = [
     title: "Project Delivery",
     description:
       "You receive a production-ready application, complete source code, and a clear handover.",
+    duration: "1–2 days",
+    deliverables: [
+      "Source code ownership",
+      "Handover documentation",
+      "Next-step recommendations",
+    ],
     icon: PackageCheck,
   },
 ];

@@ -10,6 +10,8 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-accent text-white hover:bg-accent/90 shadow-glow hover:shadow-glow-lg",
+        gradient:
+          "btn-gradient rounded-full text-white shadow-glow hover:shadow-glow-lg",
         secondary:
           "glass text-foreground hover:bg-white/[0.08] hover:border-white/[0.15]",
         ghost: "text-muted hover:text-foreground hover:bg-white/[0.05]",

@@ -10,12 +10,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#050505",
-        card: "#0B0B0B",
+        background: "#05070D",
+        card: "#0B0F18",
         border: "rgba(255,255,255,0.08)",
         foreground: "#FFFFFF",
         muted: "#A1A1AA",
         accent: "#3B82F6",
+        cyan: "#22D3EE",
+        purple: "#8B5CF6",
         success: "#22C55E",
       },
       fontFamily: {
@@ -39,12 +41,15 @@ const config: Config = {
         soft: "0 4px 24px rgba(0, 0, 0, 0.4)",
         glow: "0 0 60px rgba(59, 130, 246, 0.15)",
         "glow-lg": "0 0 100px rgba(59, 130, 246, 0.2)",
+        "glow-cyan": "0 0 40px rgba(34, 211, 238, 0.2)",
         card: "0 8px 32px rgba(0, 0, 0, 0.5)",
         glass: "0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.05)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "cta-gradient":
+          "linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%)",
       },
       animation: {
         marquee: "marquee 40s linear infinite",

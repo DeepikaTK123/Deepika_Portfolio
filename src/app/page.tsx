@@ -8,6 +8,7 @@ import { TestimonialsSection } from "@/components/sections/testimonials";
 import { IndustriesSection } from "@/components/sections/industries";
 import { TechStackSection } from "@/components/sections/tech-stack";
 import { ProcessSection } from "@/components/sections/process";
+import { ProjectPlannerSection } from "@/components/sections/project-planner";
 import { FaqSection } from "@/components/sections/faq";
 import { CTASection } from "@/components/sections/cta";
 
@@ -24,6 +25,7 @@ export default function Home() {
       <IndustriesSection />
       <TechStackSection />
       <ProcessSection />
+      <ProjectPlannerSection />
       <FaqSection />
       <CTASection />
     </>

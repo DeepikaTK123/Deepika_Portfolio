@@ -14,11 +14,9 @@ export const siteConfig = {
 } as const;
 
 export const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
-  { label: "Projects", href: "#projects" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Process", href: "#process" },
+  { label: "Project Planner", href: "#planner" },
   { label: "Contact", href: "#contact" },
 ] as const;
 
@@ -122,6 +120,8 @@ export const footerQuickLinks = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Projects", href: "#projects" },
+  { label: "Process", href: "#process" },
+  { label: "Project Planner", href: "#planner" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ] as const;

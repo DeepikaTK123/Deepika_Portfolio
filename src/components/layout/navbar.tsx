@@ -6,13 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navLinks } from "@/data/site";
 import { MagneticButton } from "@/components/effects/magnetic-button";
-import { useConsultation } from "@/components/consultation/consultation-provider";
 import { useScroll } from "@/hooks/use-scroll";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const scrolled = useScroll(20);
-  const { openConsultation } = useConsultation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
@@ -116,8 +114,8 @@ export function Navbar() {
           </ul>
 
           <div className="hidden lg:block">
-            <MagneticButton size="sm" type="button" onClick={openConsultation}>
-              Hire Me
+            <MagneticButton asChild size="sm" variant="gradient">
+              <Link href="#planner">Start Project</Link>
             </MagneticButton>
           </div>
 
@@ -193,16 +191,10 @@ export function Navbar() {
                 transition={{ delay: 0.35 }}
                 className="mt-6"
               >
-                <MagneticButton
-                  className="w-full"
-                  size="lg"
-                  type="button"
-                  onClick={() => {
-                    closeMobile();
-                    openConsultation();
-                  }}
-                >
-                  Hire Me
+                <MagneticButton asChild className="w-full" size="lg" variant="gradient">
+                  <Link href="#planner" onClick={closeMobile}>
+                    Start Project
+                  </Link>
                 </MagneticButton>
               </motion.div>
             </motion.nav>

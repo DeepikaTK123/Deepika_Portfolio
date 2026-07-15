@@ -1,11 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Calendar, Clock3 } from "lucide-react";
+import { ArrowRight, Clock3 } from "lucide-react";
 import { MagneticButton } from "@/components/effects/magnetic-button";
 import { FadeIn } from "@/components/effects/fade-in";
 import { GradientBlob } from "@/components/effects/gradient-blob";
-import { useConsultation } from "@/components/consultation/consultation-provider";
 import { contactEmail, linkedInUrl, siteConfig } from "@/data/site";
 
 const contactDetails = [
@@ -31,8 +31,6 @@ const contactDetails = [
 ] as const;
 
 export function CTASection() {
-  const { openConsultation } = useConsultation();
-
   return (
     <section
       id="contact"
@@ -42,7 +40,7 @@ export function CTASection() {
       <div className="container-wide">
         <FadeIn>
           <div className="relative overflow-hidden rounded-3xl sm:rounded-4xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-background to-accent/10" />
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-background to-purple/15" />
             <GradientBlob
               className="right-[-10%] top-[-30%]"
               color="rgba(59,130,246,0.2)"
@@ -50,7 +48,7 @@ export function CTASection() {
             />
             <GradientBlob
               className="bottom-[-30%] left-[-10%]"
-              color="rgba(59,130,246,0.15)"
+              color="rgba(139,92,246,0.15)"
               size="500px"
               delay={2}
             />
@@ -163,13 +161,15 @@ export function CTASection() {
                 transition={{ duration: 0.8, delay: 0.25 }}
               >
                 <MagneticButton
+                  asChild
                   size="lg"
-                  type="button"
+                  variant="gradient"
                   className="w-full sm:w-auto"
-                  onClick={openConsultation}
                 >
-                  <Calendar size={18} />
-                  Book a Free Consultation
+                  <Link href="#planner">
+                    Start Project
+                    <ArrowRight size={18} />
+                  </Link>
                 </MagneticButton>
               </motion.div>
             </div>

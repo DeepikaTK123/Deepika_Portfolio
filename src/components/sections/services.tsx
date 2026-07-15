@@ -1,12 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { TextReveal } from "@/components/effects/text-reveal";
 import { FadeIn } from "@/components/effects/fade-in";
 import { services } from "@/data/services";
 import { cn } from "@/lib/utils";
 
 export function ServicesSection() {
+  const [openId, setOpenId] = useState<string | null>(null);
+
   return (
     <section
       id="services"
@@ -14,58 +18,123 @@ export function ServicesSection() {
       aria-label="Services"
     >
       <div className="container-wide">
-        <div className="mb-12 max-w-2xl sm:mb-16 md:mb-20">
+        <div className="mx-auto mb-12 max-w-2xl text-center sm:mb-16 md:mb-20">
           <TextReveal
-            text="Services"
+            text="What I Build"
             as="h2"
             className="text-heading font-bold"
           />
           <FadeIn delay={0.2}>
             <p className="mt-5 text-body text-muted sm:mt-6">
-              Premium digital solutions designed to help businesses grow —
-              from custom web applications and dashboards to scalable backends
-              and thoughtful product enhancements.
+              Focused offerings for businesses that need reliable web products —
+              from first build to meaningful upgrades.
             </p>
           </FadeIn>
         </div>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:gap-8">
-          {services.map((service, i) => (
-            <FadeIn key={service.id} delay={i * 0.1}>
-              <motion.div
-                className={cn(
-                  "group relative h-full rounded-3xl border border-white/[0.06] bg-card p-6 sm:p-8 md:p-10",
-                  "hover:border-white/[0.12] hover:bg-white/[0.02]",
-                  "transition-all duration-500"
-                )}
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-accent/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          {services.map((service, i) => {
+            const isOpen = openId === service.id;
+            return (
+              <FadeIn key={service.id} delay={i * 0.08}>
+                <motion.article
+                  className={cn(
+                    "group relative flex h-full flex-col rounded-3xl border border-white/[0.08] bg-card p-6 sm:p-8",
+                    "transition-all duration-500 hover:border-white/[0.14] hover:bg-white/[0.02]",
+                    "hover:shadow-[0_20px_50px_rgba(59,130,246,0.1)]"
+                  )}
+                  whileHover={{ y: -6 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <div className="mb-5 flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan/25 bg-cyan/10 transition-transform duration-500 group-hover:scale-110">
+                        <service.icon
+                          className="h-5 w-5 text-cyan"
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                      <h3 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+                        {service.title}
+                      </h3>
+                    </div>
+                    {service.badge && (
+                      <span
+                        className={cn(
+                          "shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider",
+                          service.badgeTone === "purple"
+                            ? "bg-purple/15 text-purple"
+                            : "bg-cyan/15 text-cyan"
+                        )}
+                      >
+                        {service.badge}
+                      </span>
+                    )}
+                  </div>
 
-                <div className="relative">
-                  <motion.div
-                    className="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-7"
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <service.icon
-                      className="w-6 h-6 text-accent transition-transform duration-500 group-hover:scale-110"
-                      strokeWidth={1.5}
-                    />
-                  </motion.div>
-
-                  <h3 className="text-xl md:text-[1.35rem] font-semibold tracking-tight text-foreground mb-4 leading-snug">
-                    {service.title}
-                  </h3>
-
-                  <p className="text-muted leading-relaxed text-[0.95rem] md:text-base">
+                  <p className="flex-1 text-[0.95rem] leading-relaxed text-muted md:text-base">
                     {service.description}
                   </p>
-                </div>
-              </motion.div>
-            </FadeIn>
-          ))}
+
+                  <button
+                    type="button"
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-cyan"
+                    aria-expanded={isOpen}
+                    onClick={() => setOpenId(isOpen ? null : service.id)}
+                  >
+                    Click to see capabilities &amp; stack
+                    <ChevronDown
+                      className={cn(
+                        "h-4 w-4 transition-transform duration-300",
+                        isOpen && "rotate-180"
+                      )}
+                    />
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="mt-4 space-y-4 border-t border-white/[0.06] pt-4">
+                          <div>
+                            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted">
+                              Capabilities
+                            </p>
+                            <ul className="grid gap-2 sm:grid-cols-2">
+                              {service.capabilities.map((item) => (
+                                <li
+                                  key={item}
+                                  className="flex items-start gap-2 text-sm text-muted"
+                                >
+                                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan" />
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {service.stack.map((tech) => (
+                              <span
+                                key={tech}
+                                className="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-xs text-muted"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.article>
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>
